@@ -10,7 +10,12 @@ import DragAndDrop from 'src/shared/components/DragAndDrop'
 import {notifyCSVUploadFailed} from 'src/shared/copy/notifications'
 
 import {TemplateBuilderProps, TemplateValueType, TemplateValue} from 'src/types'
-import {trimAndRemoveQuotes} from 'src/tempVars/parsing'
+
+const trimAndRemoveQuotes = elt => {
+  const trimmed = elt.trim()
+  const dequoted = trimmed.replace(/(^")|("$)/g, '')
+  return dequoted
+}
 
 interface State {
   templateValuesString: string
