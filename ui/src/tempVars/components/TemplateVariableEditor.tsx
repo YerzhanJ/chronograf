@@ -16,6 +16,7 @@ import ConfirmButton from 'src/shared/components/ConfirmButton'
 import {getDeep} from 'src/utils/wrappers'
 import {notify as notifyActionCreator} from 'src/shared/actions/notifications'
 
+import {formatTempVar} from 'src/tempVars/utils'
 import {
   reconcileSelectedAndLocalSelectedValues,
   pickSelected,
@@ -73,8 +74,6 @@ const TEMPLATE_BUILDERS = {
   [TemplateType.TagValues]: TagValuesTemplateBuilder,
   [TemplateType.MetaQuery]: MetaQueryTemplateBuilder,
 }
-
-const formatName = name => `:${name.replace(/:/g, '').replace(/\s/g, '')}:`
 
 const DEFAULT_TEMPLATE = DEFAULT_TEMPLATES[TemplateType.Databases]
 
@@ -274,7 +273,7 @@ class TemplateVariableEditor extends PureComponent<Props, State> {
   private formatName = (): void => {
     const {nextTemplate} = this.state
 
-    let tempVar = formatName(nextTemplate.tempVar)
+    let tempVar = formatTempVar(nextTemplate.tempVar)
 
     if (tempVar === '::') {
       tempVar = ''
@@ -290,7 +289,7 @@ class TemplateVariableEditor extends PureComponent<Props, State> {
     const {onUpdate, onCreate, notify} = this.props
     const {nextTemplate, isNew} = this.state
 
-    nextTemplate.tempVar = formatName(nextTemplate.tempVar)
+    nextTemplate.tempVar = formatTempVar(nextTemplate.tempVar)
 
     this.setState({savingStatus: RemoteDataState.Loading})
 
@@ -335,7 +334,7 @@ class TemplateVariableEditor extends PureComponent<Props, State> {
     return (
       tempVar !== '' &&
       canSaveValues &&
-      !RESERVED_TEMPLATE_NAMES.includes(formatName(tempVar)) &&
+      !RESERVED_TEMPLATE_NAMES.includes(formatTempVar(tempVar)) &&
       !this.isSaving
     )
   }
