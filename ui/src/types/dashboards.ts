@@ -128,3 +128,7 @@ export enum ThresholdType {
   BG = 'background',
   Base = 'base',
 }
+
+export interface TemplateQPSelections {
+  [tempVar: string]: string
+}
