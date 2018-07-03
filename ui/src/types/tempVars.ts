@@ -62,6 +62,7 @@ export interface URLQueryParams {
 
 export interface TemplateBuilderProps {
   template: Template
+  templates: Template[]
   source: Source
   onUpdateTemplate: (nextTemplate: Template) => void
   onUpdateDefaultTemplateValue: (item: TemplateValue) => void

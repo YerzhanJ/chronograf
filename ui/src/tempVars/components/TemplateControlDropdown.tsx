@@ -10,6 +10,7 @@ import {Template, Source} from 'src/types'
 
 interface Props {
   template: Template
+  templates: Template[]
   meRole: string
   isUsingAuth: boolean
   source: Source
@@ -35,6 +36,7 @@ class TemplateControlDropdown extends PureComponent<Props, State> {
   public render() {
     const {
       template,
+      templates,
       isUsingAuth,
       meRole,
       source,
@@ -79,6 +81,7 @@ class TemplateControlDropdown extends PureComponent<Props, State> {
         <OverlayTechnology visible={isEditing}>
           <TemplateVariableEditor
             template={template}
+            templates={templates}
             source={source}
             onCreate={onCreateTemplate}
             onUpdate={this.handleUpdateTemplate}

@@ -48,6 +48,7 @@ import {FIVE_SECONDS} from 'src/shared/constants/index'
 interface Props {
   // We will assume we are creating a new template if none is passed in
   template?: Template
+  templates: Template[]
   source: Source
   onCancel: () => void
   onCreate?: (template: Template) => Promise<any>
@@ -105,7 +106,7 @@ class TemplateVariableEditor extends PureComponent<Props, State> {
   }
 
   public render() {
-    const {source, onCancel, notify} = this.props
+    const {source, onCancel, notify, templates} = this.props
     const {nextTemplate, isNew} = this.state
     const TemplateBuilder = this.templateBuilder
 
@@ -156,6 +157,7 @@ class TemplateVariableEditor extends PureComponent<Props, State> {
             </div>
             <TemplateBuilder
               template={nextTemplate}
+              templates={templates}
               source={source}
               onUpdateTemplate={this.handleUpdateTemplate}
               notify={notify}
